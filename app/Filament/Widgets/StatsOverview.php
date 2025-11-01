@@ -4,11 +4,15 @@ namespace App\Filament\Widgets;
 
 use Filament\Widgets\StatsOverviewWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
+use Filament\Widgets\Concerns\InteractsWithPageFilters;
 use App\Models\{Advertising, Channel, Article, Post};
 
 class StatsOverview extends StatsOverviewWidget
 {
-    // protected static ?int $sort = 0;
+    use InteractsWithPageFilters;
+
+    protected static ?int $sort = 0;
+
     protected int|string|array $columnSpan = 'full';
 
     protected function getStats(): array

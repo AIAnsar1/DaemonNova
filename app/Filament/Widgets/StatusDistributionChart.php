@@ -8,6 +8,7 @@ use App\Models\{Post, Article, Advertising};
 
 class StatusDistributionChart extends ApexChartWidget
 {
+    protected static ?int $sort = 4;
     /**
      * Chart Id
      *

@@ -8,6 +8,7 @@ use App\Models\Post;
 
 class TopPostsChart extends ApexChartWidget
 {
+    protected static ?int $sort = 5;
     /**
      * Chart Id
      *

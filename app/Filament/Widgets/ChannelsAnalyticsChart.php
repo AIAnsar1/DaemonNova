@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 class ChannelsAnalyticsChart extends ApexChartWidget
 {
+    protected static ?int $sort = 2;
     /**
      * Chart Id
      *

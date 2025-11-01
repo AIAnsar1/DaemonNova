@@ -8,6 +8,7 @@ use App\Models\Channel;
 
 class ChannelActivityChart extends ApexChartWidget
 {
+    protected static ?int $sort = 1;
     /**
      * Chart Id
      *

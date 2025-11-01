@@ -8,6 +8,7 @@ use App\Models\{Post, Article, Advertising};
 
 class PostsGrowthChart extends ApexChartWidget
 {
+    protected static ?int $sort = 3;
     /**
      * Chart Id
      *

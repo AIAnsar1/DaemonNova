@@ -8,6 +8,7 @@ use App\Models\{Post, Article, Advertising};
 
 class ViewsChart extends ApexChartWidget
 {
+    protected static ?int $sort = 6;
     /**
      * Chart Id
      *
