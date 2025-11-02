@@ -39,6 +39,8 @@ class StoreChannelRequest extends FormRequest
             'members_count' => ['required', 'integer'],
             'views_total' => ['required', 'integer'],
             'last_synced_at' => ['nullable', 'date'],
+            'language' => ['required', 'string', 'max:5'],
+            'bot_is_admin' => ['required', 'boolean'],
         ];
     }
 }

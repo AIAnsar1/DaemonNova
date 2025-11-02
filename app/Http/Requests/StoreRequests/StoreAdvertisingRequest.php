@@ -33,6 +33,7 @@ class StoreAdvertisingRequest extends FormRequest
             'views' => ['nullable', 'integer'],
             'reactions_count' => ['nullable', 'integer'],
             'channel_id' => ['required', 'exists:channels,id'],
+            'language' => ['required', 'string', 'max:5'],
         ];
     }
 }

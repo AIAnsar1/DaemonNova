@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->string('author_name')->nullable();
             $table->string('author_url')->nullable();
+            $table->string('language', 5)->default('en');
             $table->timestamp('published_at')->nullable();
             $table->enum('status', ['draft', 'scheduled', 'published', 'failed'])->default('draft');
             $table->string('telegraph_url')->nullable();

@@ -29,6 +29,8 @@ class PostsTable
                 TextColumn::make('views')
                     ->numeric()
                     ->sortable(),
+                TextColumn::make('language')
+                    ->searchable(),
                 TextColumn::make('reactions_count')
                     ->numeric()
                     ->sortable(),

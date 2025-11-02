@@ -38,6 +38,8 @@ class UpdateChannelRequest extends FormRequest
             'banned_links.*' => ['string'],
             'members_count' => ['required', 'integer'],
             'views_total' => ['required', 'integer'],
+            'bot_is_admin' => ['required', 'boolean'],
+            'language' => ['required', 'string', 'max:5'],
             'last_synced_at' => ['nullable', 'date'],
         ];
     }

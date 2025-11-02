@@ -18,7 +18,8 @@ return new class extends Migration
             $table->string('title');
             $table->text('description')->nullable();
             $table->string('invite_link')->nullable();
-
+            $table->boolean('bot_is_admin')->default(false)->nullable();
+            $table->string('language', 5)->default('en');
             $table->bigInteger('discussion_group_id')->unique()->nullable();
             $table->string('discussion_group_link')->unique()->nullable();
             $table->boolean('comments_enabled')->default(false);

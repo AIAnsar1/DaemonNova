@@ -39,6 +39,8 @@ class ChannelsTable
                 TextColumn::make('members_count')
                     ->numeric()
                     ->sortable(),
+                TextColumn::make('language')
+                    ->searchable(),
                 TextColumn::make('views_total')
                     ->numeric()
                     ->sortable(),

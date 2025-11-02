@@ -2,10 +2,10 @@
 
 namespace App\Filament\Resources\Articles\Schemas;
 
-use Filament\Forms\Components\DateTimePicker;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Textarea;
+
 use Filament\Schemas\Schema;
+use Filament\Schemas\Components\Utilities\{Get, Set};
+use Filament\Forms\Components\{DateTimePicker, FileUpload, MarkdownEditor, RichEditor, Select, TextInput, Textarea, Hidden, Toggle};
 
 class ArticleForm
 {
@@ -13,35 +13,46 @@ class ArticleForm
     {
         return $schema
             ->components([
-                TextInput::make('content'),
+                FileUpload::make('contents')
+                    ->multiple()
+                    ->required()
+                    ->disk('public')
+                    ->directory('posts')
+                    ->visibility('public'),
                 TextInput::make('title')
                     ->required(),
-                Textarea::make('description')
+                MarkdownEditor::make('description')
                     ->columnSpanFull(),
-                TextInput::make('slug')
-                    ->required(),
                 TextInput::make('author_name'),
-                TextInput::make('author_url')
-                    ->url(),
-                DateTimePicker::make('published_at'),
-                TextInput::make('status')
+                Toggle::make('publish_now')->label('Опубликовать сразу')->default(false)->live(),
+                DateTimePicker::make('publish_date')->required()->visible(fn (Get $get) => !$get('publish_now'))->default(now()->addHour()),
+                Hidden::make('publish_date')->dehydrateStateUsing(function (Get $get) {
+                    if ($get('publish_now')) {
+                        return now();
+                    }
+                    return $get('publish_date');
+                }),
+                Select::make('status')
+                    ->label('Статус поста')
+                    ->options([
+                        'draft' => 'Черновик',
+                        'scheduled' => 'Запланирован',
+                        'published' => 'Опубликован',
+                        'failed' => 'Ошибка',
+                    ])
+                    ->default('draft')
                     ->required()
-                    ->default('draft'),
-                TextInput::make('telegraph_url')
-                    ->tel()
-                    ->url(),
-                TextInput::make('views')
+                    ->native(false),
+                Select::make('language')
                     ->required()
-                    ->numeric()
-                    ->default(0),
-                TextInput::make('reactions_count')
-                    ->required()
-                    ->numeric()
-                    ->default(0),
-                DateTimePicker::make('last_synced_at'),
-                TextInput::make('channel_id')
-                    ->required()
-                    ->numeric(),
+                    ->options([
+                        'ru' => 'Русский',
+                        'en' => 'English',
+                        'uz' => 'Uzbek',
+                    ])
+                    ->default('en'),
+                Select::make('tag_id')->label('Tag')->relationship('tags', 'title')->required()->multiple()->searchable(),
+                Select::make('channels_id')->label('Channel')->relationship('channel', 'name')->required()->searchable(),
             ]);
     }
 }

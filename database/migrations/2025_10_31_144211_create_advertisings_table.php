@@ -18,6 +18,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->timestamp('published_at')->nullable();
             $table->timestamp('expires_at')->nullable();
+            $table->string('language', 5)->default('en');
             $table->enum('status', ['draft', 'scheduled', 'published', 'failed', 'archived'])->default('draft');
             $table->string('telegram_post_id')->nullable()->index();
             $table->string('post_url')->nullable();

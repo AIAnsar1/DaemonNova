@@ -23,9 +23,11 @@ class Channel extends Model
         'ban_on_link_username',
         'banned_usernames',
         'banned_links',
+        'bot_is_admin',
         'members_count',
         'views_total',
         'last_synced_at',
+        'language',
     ];
     
     protected $casts = [
@@ -46,5 +48,20 @@ class Channel extends Model
     public function advertisings()
     {
         return $this->hasMany(Advertising::class);
+    }
+
+    public function setBannedUsernamesAttribute($value)
+    {
+        $this->attributes['banned_usernames'] = json_encode(array_filter(array_map('trim', explode(',', $value))));
+    }
+
+    public function setBannedLinksAttribute($value)
+    {
+        $this->attributes['banned_links'] = json_encode(array_filter(array_map('trim', explode(',', $value))));
+    }
+
+    public function setBannedWordsAttribute($value)
+    {
+        $this->attributes['banned_words'] = json_encode(array_filter(array_map('trim', explode(',', $value))));
     }
 }

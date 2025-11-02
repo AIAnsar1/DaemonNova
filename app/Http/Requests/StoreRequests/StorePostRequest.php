@@ -30,6 +30,7 @@ class StorePostRequest extends FormRequest
             'post_url' => ['nullable', 'string'],
             'views' => ['nullable', 'integer'],
             'reactions_count' => ['nullable', 'integer'],
+            'language' => ['required', 'string', 'max:5'],
             'channel_id' => ['required', 'exists:channels,id'],
         ];
     }
